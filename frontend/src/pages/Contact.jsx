@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 
@@ -48,10 +49,10 @@ const Contact = () => {
       <div className="container px-5 py-24 mx-auto flex">
         <div className="lg:w-1/3 md:w-1/2 bg-gray-900 shadow-md rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10">
           <h2 className="text-white text-lg mb-1 font-medium title-font">
-            Feedback
+            contact us
           </h2>
           <p className="leading-relaxed mb-5">
-            Post-ironic portland shabby chic echo park, banjo fashion axe
+            Connect with us and let's create something amazing together!
           </p>
           <div className="relative mb-4">
             <label htmlFor="email" className="leading-7 text-sm text-gray-400">
@@ -81,8 +82,8 @@ const Contact = () => {
             Button
           </button>
           <p className="text-xs text-gray-400 text-opacity-90 mt-3">
-            Chicharrones blog helvetica normcore iceland tousled brook viral
-            artisan.
+            Reach out to us and let's start a conversation about your ideas and
+            needs!
           </p>
         </div>
       </div>
