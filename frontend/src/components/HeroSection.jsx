@@ -17,9 +17,12 @@ const HeroSection = () => {
           experience.
         </p>
         <div className="flex flex-wrap justify-center">
-          <button className="px-8 py-3 m-2 text-lg font-semibold rounded dark:bg-violet-600 dark:text-gray-50">
+          <a
+            href="#menu"
+            className="px-8 py-3 m-2 text-lg font-semibold rounded dark:bg-violet-600 dark:text-gray-50"
+          >
             Explore Menu
-          </button>
+          </a>
           <button className="px-8 py-3 m-2 text-lg border rounded dark:text-gray-900 dark:border-gray-300">
             Learn more
           </button>

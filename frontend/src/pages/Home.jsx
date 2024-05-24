@@ -2,11 +2,14 @@
 import FounderSection from "../components/FounderSection";
 import HeroSection from "../components/HeroSection";
 import React from "react";
+import Menu from "../components/Menu";
+
 const Home = () => {
   return (
-    <div>
+    <div className="scroll-smooth">
       <HeroSection />
       <FounderSection />
+      <Menu />
     </div>
   );
 };
