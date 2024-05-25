@@ -12,6 +12,9 @@ import PaymentSuccess from "./components/PaymentSucess.jsx";
 import Profile from "./pages/Profile.jsx";
 import Order from "./pages/Order.jsx";
 import OrderDetailPage from "./pages/OrderDetailPage.jsx";
+import Dashboard from "./components/Dashboard.jsx";
+import Users from "./components/Users.jsx";
+import AdminOrders from "./components/AdminOrders.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -52,6 +55,18 @@ const router = createBrowserRouter([
       {
         path: "/order/:id",
         element: <OrderDetailPage />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/admin/users",
+        element: <Users />,
+      },
+      {
+        path: "/admin/orders",
+        element: <AdminOrders />,
       },
     ],
   },
