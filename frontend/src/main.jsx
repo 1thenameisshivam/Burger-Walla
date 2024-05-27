@@ -15,6 +15,8 @@ import OrderDetailPage from "./pages/OrderDetailPage.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import Users from "./components/Users.jsx";
 import AdminOrders from "./components/AdminOrders.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/contact",
