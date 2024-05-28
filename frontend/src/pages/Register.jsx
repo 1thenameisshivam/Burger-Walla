@@ -1,8 +1,68 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import Logo from "../components/Logo";
+import { VITE_REGISTER_URL } from "../config/constant";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(VITE_REGISTER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (result.success) {
+        toast.success(result.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        navigate("/");
+      } else {
+        toast.error(result.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    } catch (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  };
   return (
     <div>
       <section className="bg-gray-50">
@@ -29,6 +89,9 @@ const Register = () => {
                   className="form-input w-full p-2 rounded"
                   type="text"
                   name="name"
+                  onChange={(e) =>
+                    setData({ ...data, [e.target.name]: e.target.value })
+                  }
                   placeholder="Your full name"
                 />
               </label>
@@ -40,6 +103,9 @@ const Register = () => {
                   className="form-input w-full p-2 rounded"
                   type="email"
                   name="email"
+                  onChange={(e) =>
+                    setData({ ...data, [e.target.name]: e.target.value })
+                  }
                   placeholder="Ex. james@bond.com"
                 />
               </label>
@@ -50,6 +116,9 @@ const Register = () => {
                 <input
                   className="form-input w-full p-2 rounded"
                   type="password"
+                  onChange={(e) =>
+                    setData({ ...data, [e.target.name]: e.target.value })
+                  }
                   placeholder="••••••••"
                   name="password"
                 />
@@ -63,6 +132,7 @@ const Register = () => {
                 </label>
                 <input
                   type="submit"
+                  onClick={handleRegister}
                   className="w-full mt-5 btn btn-primary sm:w-auto sm:mt-0"
                   value="Sign up"
                 />
