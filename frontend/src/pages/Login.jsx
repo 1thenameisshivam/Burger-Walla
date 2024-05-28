@@ -1,8 +1,62 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
+import { VITE_LOGIN_URL } from "../config/constant";
+import { toast } from "react-toastify";
 const Login = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState({ email: "", password: "" });
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(VITE_LOGIN_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (result.success) {
+        toast.success(result.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        navigate("/");
+      } else {
+        toast.error(result.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    } catch (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  };
   return (
     <div>
       <section className="bg-gray-50">
@@ -29,6 +83,9 @@ const Login = () => {
                 <input
                   className="form-input w-full p-2 rounded"
                   type="email"
+                  onChange={(e) =>
+                    setData({ ...data, [e.target.name]: e.target.value })
+                  }
                   placeholder="Ex. james@bond.com"
                   name="email"
                 />
@@ -41,6 +98,9 @@ const Login = () => {
                   className="form-input w-full p-2 rounded"
                   name="password"
                   type="password"
+                  onChange={(e) =>
+                    setData({ ...data, [e.target.name]: e.target.value })
+                  }
                   placeholder="••••••••"
                 />
               </label>
@@ -53,6 +113,7 @@ const Login = () => {
                 </label>
                 <input
                   type="submit"
+                  onClick={handleLogin}
                   className="btn btn-primary cursor-pointer"
                   value="Login"
                 />
