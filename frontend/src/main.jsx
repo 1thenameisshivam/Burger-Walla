@@ -19,6 +19,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import store from "./redux/appStore.js";
 import { Provider } from "react-redux";
+import checkAuth from "./Utils/checkAuth.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,42 +43,52 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
+        loader: checkAuth,
         element: <Cart />,
       },
       {
         path: "/cart/shipping",
+        loader: checkAuth,
         element: <Shipping />,
       },
       {
         path: "/cart/confirm-order",
+        loader: checkAuth,
         element: <ConfirmOrder />,
       },
       {
         path: "/cart/payment-success",
+        loader: checkAuth,
         element: <PaymentSuccess />,
       },
       {
         path: "/profile",
+        loader: checkAuth,
         element: <Profile />,
       },
       {
         path: "/order",
+        loader: checkAuth,
         element: <Order />,
       },
       {
         path: "/order/:id",
+        loader: checkAuth,
         element: <OrderDetailPage />,
       },
       {
         path: "/dashboard",
+        loader: checkAuth,
         element: <Dashboard />,
       },
       {
         path: "/admin/users",
+        loader: checkAuth,
         element: <Users />,
       },
       {
         path: "/admin/orders",
+        loader: checkAuth,
         element: <AdminOrders />,
       },
     ],

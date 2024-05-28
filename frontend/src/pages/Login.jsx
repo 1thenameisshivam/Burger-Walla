@@ -6,9 +6,12 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import { VITE_LOGIN_URL } from "../config/constant";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../redux/userSlice";
 const Login = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({ email: "", password: "" });
+  const dispatch = useDispatch();
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -22,6 +25,7 @@ const Login = () => {
       });
       const result = await response.json();
       if (result.success) {
+        dispatch(setLogin());
         toast.success(result.message, {
           position: "top-right",
           autoClose: 5000,

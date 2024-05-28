@@ -40,7 +40,9 @@ const Navbar = ({ isAuthenticated = false }) => {
             to={"/cart"}
             className="mr-5 hover:text-black hover:bg-white rounded p-2 px-4 cursor-pointer"
           >
-            <IoMdCart />
+            <span className="text-2xl cursor-pointer">
+              <IoMdCart />
+            </span>
           </Link>
           <Link to={isAuthenticated ? "/profile" : "/login"}>
             {isAuthenticated ? (

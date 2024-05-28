@@ -18,14 +18,16 @@ const userInfo = createSlice({
   name: "userInfo",
   initialState,
   reducers: {
-    Login: (state, action) => {
-      state.token = action.payload;
+    setLogin: (state) => {
+      state.token = Cookies.get("token");
+      state.isAuthenticated = true;
     },
     Logout: (state) => {
       state.token = null;
+      state.isAuthenticated = false;
     },
   },
 });
 
-export const { Login, setUser } = userInfo.actions;
+export const { setLogin, Logout } = userInfo.actions;
 export default userInfo.reducer;
