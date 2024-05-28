@@ -48,7 +48,7 @@ export const registerController = async (req, res) => {
   });
 
   res.cookie("token", token, {
-    httpOnly: true,
+    httpOnly: false,
     sameSite: "strict",
     maxAge: 3 * 24 * 60 * 60 * 1000,
   });

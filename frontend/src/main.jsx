@@ -17,6 +17,8 @@ import Users from "./components/Users.jsx";
 import AdminOrders from "./components/AdminOrders.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import store from "./redux/appStore.js";
+import { Provider } from "react-redux";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -84,6 +86,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
