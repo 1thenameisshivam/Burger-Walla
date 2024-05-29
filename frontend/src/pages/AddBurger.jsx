@@ -4,10 +4,8 @@ import Logo from "../components/Logo";
 import { Link } from "react-router-dom";
 import { VITE_ADD_BURGER } from "../config/constant";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 const AddBurger = () => {
-  const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const [data, setData] = useState({
     name: "",
@@ -32,15 +30,15 @@ const AddBurger = () => {
       const response = await data.json();
       if (response.sucess) {
         setLoader(false);
-        toast(response.message);
-        navigate("/");
+        toast.success(response.message);
+        setData({ name: "", price: "", image: null });
       } else {
         setLoader(false);
-        toast(response.message);
+        toast.error(response.message);
       }
     } catch (err) {
       setLoader(false);
-      toast("Something went wrong");
+      toast.error(err);
     }
   };
   return (
