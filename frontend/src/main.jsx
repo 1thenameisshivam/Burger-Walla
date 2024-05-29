@@ -21,6 +21,7 @@ import store from "./redux/appStore.js";
 import { Provider } from "react-redux";
 import CheckAuth from "./Utils/CheckAuth.js";
 import AddBurger from "./pages/AddBurger.jsx";
+import AllBurger from "./pages/AllBurger.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -112,6 +113,14 @@ const router = createBrowserRouter([
         element: (
           <CheckAuth adminOnly={true}>
             <AddBurger />
+          </CheckAuth>
+        ),
+      },
+      {
+        path: "/dasboard/burgers",
+        element: (
+          <CheckAuth adminOnly={true}>
+            <AllBurger />
           </CheckAuth>
         ),
       },

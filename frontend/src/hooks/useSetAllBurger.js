@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch } from "react-redux";
 import { setBurgers } from "../redux/burgerSlice";
 import { useEffect } from "react";

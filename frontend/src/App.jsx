@@ -12,12 +12,12 @@ function App() {
   );
 
   return (
-    <>
+    <div className="overflow-hidden">
       <Navbar isAuthenticated={isAuthenticated} />
       <Outlet />
       <Footer />
       <ToastContainer />
-    </>
+    </div>
   );
 }
 

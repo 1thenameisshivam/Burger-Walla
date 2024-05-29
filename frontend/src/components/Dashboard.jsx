@@ -71,7 +71,7 @@ const Dashboard = () => {
               </Link>
               <Link
                 className="bg-violet-500 text-white p-3 text-2xl rounded m-2"
-                to="/admin/users"
+                to="/dasboard/burgers"
               >
                 View ALL Items
               </Link>
