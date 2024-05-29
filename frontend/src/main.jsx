@@ -20,6 +20,7 @@ import Register from "./pages/Register.jsx";
 import store from "./redux/appStore.js";
 import { Provider } from "react-redux";
 import CheckAuth from "./Utils/CheckAuth.js";
+import AddBurger from "./pages/AddBurger.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -103,6 +104,14 @@ const router = createBrowserRouter([
         element: (
           <CheckAuth adminOnly={true}>
             <Dashboard />
+          </CheckAuth>
+        ),
+      },
+      {
+        path: "/dasboard/add",
+        element: (
+          <CheckAuth adminOnly={true}>
+            <AddBurger />
           </CheckAuth>
         ),
       },

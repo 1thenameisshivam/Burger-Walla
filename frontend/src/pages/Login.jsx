@@ -68,7 +68,6 @@ const Login = () => {
         <div className="px-4 py-20 mx-auto max-w-7xl">
           <Link
             to={"/"}
-            title="Kutty Home Page"
             className="flex items-center justify-start sm:justify-center"
           >
             <span className="bg-violet-600 text-white rounded text-2xl p-2">
