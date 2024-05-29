@@ -62,7 +62,20 @@ const Dashboard = () => {
                 View Users
               </Link>
             </div>
-
+            <div className="flex flex-col">
+              <Link
+                className="bg-violet-500 text-white p-3 text-2xl rounded m-2"
+                to="/admin/orders"
+              >
+                Add Items
+              </Link>
+              <Link
+                className="bg-violet-500 text-white p-3 text-2xl rounded m-2"
+                to="/admin/users"
+              >
+                View ALL Items
+              </Link>
+            </div>
             <aside className="w-96 h-96">
               <Doughnut data={data} />
             </aside>

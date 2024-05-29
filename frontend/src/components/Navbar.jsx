@@ -6,7 +6,9 @@ import { IoMdCart } from "react-icons/io";
 import Logo from "../components/Logo";
 import { IoLogIn } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useSetUserData } from "../hooks/useSetUserData";
 const Navbar = ({ isAuthenticated = false }) => {
+  useSetUserData();
   return (
     <header className=" body-font bg-violet-600 text-white">
       <div className="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">

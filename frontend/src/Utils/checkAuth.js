@@ -1,23 +1,43 @@
-import Cookies from "js-cookie";
-import { redirect } from "react-router-dom";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-const checkAuth = () => {
-  const token = Cookies.get("token");
-  if (token) {
-    return true;
-  } else {
-    toast.error("You are not Logged In", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-    return redirect("/login");
-  }
+
+const CheckAuth = ({ children, adminOnly }) => {
+  const navigate = useNavigate();
+  const { userInfo, isAuthenticated } = useSelector((state) => state.userInfo);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error("Please Login First", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      navigate("/login");
+    } else if (adminOnly && userInfo?.role !== "admin") {
+      toast.error("You are not Admin", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      navigate("/");
+    }
+  }, [isAuthenticated, userInfo?.role, adminOnly]);
+
+  return children;
 };
 
-export default checkAuth;
+export default CheckAuth;

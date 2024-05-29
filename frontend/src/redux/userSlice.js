@@ -4,14 +4,13 @@ import Cookies from "js-cookie";
 let initialState = {
   token: null,
   isAuthenticated: false,
+  userInfo: null,
 };
 
 const token = Cookies.get("token");
 if (token) {
-  initialState = {
-    token,
-    isAuthenticated: true,
-  };
+  initialState.token = token;
+  initialState.isAuthenticated = true;
 }
 
 const userInfo = createSlice({
@@ -24,10 +23,15 @@ const userInfo = createSlice({
     },
     Logout: (state) => {
       state.token = null;
+      Cookies.remove("token");
+      state.userInfo = null;
       state.isAuthenticated = false;
+    },
+    setUserInfo: (state, action) => {
+      state.userInfo = action.payload;
     },
   },
 });
 
-export const { setLogin, Logout } = userInfo.actions;
+export const { setLogin, Logout, setUserInfo } = userInfo.actions;
 export default userInfo.reducer;

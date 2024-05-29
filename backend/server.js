@@ -4,6 +4,7 @@ import { FRONTEND_URL, PORT } from "./Utils/constant.js";
 import cookieParser from "cookie-parser";
 import dbConnection from "./Utils/dbConnection.js";
 import userRouter from "./Authentication/Routes/userRoutes.js";
+import burgerRoute from "./Authentication/Routes/burgerRoute.js";
 const app = express();
 app.use(
   cors({
@@ -17,6 +18,7 @@ app.use(express.json());
 dbConnection();
 
 app.use("/users", userRouter);
+app.use("/burger", burgerRoute);
 
 app.listen(PORT, () => {
   console.log("Server is running on port ", PORT);

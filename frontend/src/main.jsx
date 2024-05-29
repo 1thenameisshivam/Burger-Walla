@@ -19,7 +19,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import store from "./redux/appStore.js";
 import { Provider } from "react-redux";
-import checkAuth from "./Utils/checkAuth.js";
+import CheckAuth from "./Utils/CheckAuth.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,53 +43,84 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        loader: checkAuth,
-        element: <Cart />,
+
+        element: (
+          <CheckAuth>
+            <Cart />
+          </CheckAuth>
+        ),
       },
       {
         path: "/cart/shipping",
-        loader: checkAuth,
-        element: <Shipping />,
+        element: (
+          <CheckAuth>
+            <Shipping />
+          </CheckAuth>
+        ),
       },
       {
         path: "/cart/confirm-order",
-        loader: checkAuth,
-        element: <ConfirmOrder />,
+        element: (
+          <CheckAuth>
+            <ConfirmOrder />
+          </CheckAuth>
+        ),
       },
       {
         path: "/cart/payment-success",
-        loader: checkAuth,
-        element: <PaymentSuccess />,
+        element: (
+          <CheckAuth>
+            <PaymentSuccess />
+          </CheckAuth>
+        ),
       },
       {
         path: "/profile",
-        loader: checkAuth,
-        element: <Profile />,
+        element: (
+          <CheckAuth>
+            <Profile />
+          </CheckAuth>
+        ),
       },
       {
         path: "/order",
-        loader: checkAuth,
-        element: <Order />,
+        element: (
+          <CheckAuth>
+            <Order />
+          </CheckAuth>
+        ),
       },
       {
         path: "/order/:id",
-        loader: checkAuth,
-        element: <OrderDetailPage />,
+        element: (
+          <CheckAuth>
+            <OrderDetailPage />
+          </CheckAuth>
+        ),
       },
       {
-        path: "/dashboard",
-        loader: checkAuth,
-        element: <Dashboard />,
+        path: "/dasboard",
+        element: (
+          <CheckAuth adminOnly={true}>
+            <Dashboard />
+          </CheckAuth>
+        ),
       },
       {
         path: "/admin/users",
-        loader: checkAuth,
-        element: <Users />,
+        element: (
+          <CheckAuth>
+            <Users />
+          </CheckAuth>
+        ),
       },
       {
         path: "/admin/orders",
-        loader: checkAuth,
-        element: <AdminOrders />,
+        element: (
+          <CheckAuth>
+            <AdminOrders />
+          </CheckAuth>
+        ),
       },
     ],
   },
