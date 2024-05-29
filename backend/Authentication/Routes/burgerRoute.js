@@ -5,6 +5,7 @@ import Authenticate from "../../Middleware/Authenticate.js";
 import getAllBurger from "../Controller/getAllBurger.js";
 import upload from "../../Middleware/Multer.js";
 import deleteBurger from "../Controller/deleteBurger.js";
+import updateBurger from "../Controller/updateController.js";
 const burgerRoute = express.Router();
 
 burgerRoute.post(
@@ -13,6 +14,11 @@ burgerRoute.post(
   addBurger
 );
 burgerRoute.get("/", getAllBurger);
+burgerRoute.put(
+  "/update/:id",
+  [Authenticate, Authorised, upload.single("image")],
+  updateBurger
+);
 burgerRoute.delete("/delete/:id", [Authenticate, Authorised], deleteBurger);
 
 export default burgerRoute;
