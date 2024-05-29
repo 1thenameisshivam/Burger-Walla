@@ -9,6 +9,7 @@ const AllBurger = () => {
       {data?.map((value) => (
         <Card
           admin={true}
+          id={value._id}
           key={value._id}
           image={value.image}
           name={value.name}

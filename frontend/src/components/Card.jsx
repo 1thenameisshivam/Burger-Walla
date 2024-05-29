@@ -1,10 +1,34 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
-
-const Card = ({ image, name, price, admin = false }) => {
+import { VITE_DELETE_BURGER } from "../config/constant";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import Loader from "./Loader";
+const Card = ({ image, name, price, admin = false, id = null }) => {
+  const [Loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const handleDelete = async () => {
+    setLoading(true);
+    const data = await fetch(VITE_DELETE_BURGER + id, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    const response = await data.json();
+    if (response.sucess) {
+      setLoading(false);
+      toast.success(response.message);
+      navigate("/");
+    }
+    if (!response.sucess) {
+      setLoading(false);
+      toast.success(response.message);
+    }
+  };
   return (
     <div className="max-w-xs relative  rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
+      {Loading && <Loader />}
       <img
         src={image}
         alt=""
@@ -13,7 +37,9 @@ const Card = ({ image, name, price, admin = false }) => {
       {admin && (
         <div className=" top-1  absolute left-3 text-center">
           <span className="pr-14 ">🖋️</span>
-          <span className="pl-20 ">❌</span>
+          <span onClick={handleDelete} className="pl-20 cursor-pointer ">
+            ❌
+          </span>
         </div>
       )}
 

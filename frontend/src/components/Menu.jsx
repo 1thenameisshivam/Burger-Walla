@@ -7,7 +7,7 @@ const Menu = () => {
   return (
     <div className="w-full p-4" id="menu">
       <h1 className="text-4xl mb-2 font-bold text-center">Menu</h1>
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex gap-3 flex-wrap justify-center">
         {data?.map((value) => (
           <Card
             key={value._id}
