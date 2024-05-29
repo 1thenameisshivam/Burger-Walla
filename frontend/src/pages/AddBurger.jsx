@@ -1,17 +1,32 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Logo from "../components/Logo";
-import { Link } from "react-router-dom";
-import { VITE_ADD_BURGER } from "../config/constant";
+import { Link, useNavigate } from "react-router-dom";
+import { VITE_ADD_BURGER, VITE_UPDATE_BURGER } from "../config/constant";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
+
 const AddBurger = () => {
   const [loader, setLoader] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
     price: "",
     image: null,
   });
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [burgerId, setBurgerId] = useState(null);
+
+  useEffect(() => {
+    if (location.state) {
+      const { name, price, image, id } = location.state;
+      setData({ name, price, image });
+      setBurgerId(id);
+      setIsUpdate(true);
+    }
+  }, [location.state]);
 
   const handleAddBurger = async (e) => {
     e.preventDefault();
@@ -22,31 +37,35 @@ const AddBurger = () => {
     formData.append("image", data.image);
 
     try {
-      const data = await fetch(VITE_ADD_BURGER, {
-        method: "POST",
+      const url = isUpdate ? VITE_UPDATE_BURGER + burgerId : VITE_ADD_BURGER;
+      const method = isUpdate ? "PUT" : "POST";
+      const response = await fetch(url, {
+        method,
         credentials: "include",
         body: formData,
       });
-      const response = await data.json();
-      if (response.sucess) {
+      const result = await response.json();
+      if (result.success) {
         setLoader(false);
-        toast.success(response.message);
+        toast.success(result.message);
         setData({ name: "", price: "", image: null });
+        navigate("/");
       } else {
         setLoader(false);
-        toast.error(response.message);
+        toast.error(result.message);
       }
     } catch (err) {
       setLoader(false);
       toast.error(err);
     }
   };
+
   return (
     <div className="flex relative justify-center items-center h-screen bg-purple-500">
       {loader && <Loader />}
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <Link
-          to={"/"}
+          to="/"
           className="flex items-center justify-start sm:justify-center p-2"
         >
           <span className="bg-violet-600 text-white rounded text-2xl p-2">
@@ -115,7 +134,7 @@ const AddBurger = () => {
             type="submit"
             onClick={handleAddBurger}
           >
-            Submit
+            {isUpdate ? "Update" : "Submit"}
           </button>
         </div>
       </form>

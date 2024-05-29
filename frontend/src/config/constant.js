@@ -4,4 +4,5 @@ export const {
   VITE_ADD_BURGER,
   VITE_GET_BURGERS,
   VITE_DELETE_BURGER,
+  VITE_UPDATE_BURGER,
 } = import.meta.env;

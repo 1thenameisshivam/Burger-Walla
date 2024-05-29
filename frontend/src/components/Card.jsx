@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import Loader from "./Loader";
+
 const Card = ({ image, name, price, admin = false, id = null }) => {
   const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleDelete = async () => {
     setLoading(true);
     const data = await fetch(VITE_DELETE_BURGER + id, {
@@ -16,18 +18,23 @@ const Card = ({ image, name, price, admin = false, id = null }) => {
       credentials: "include",
     });
     const response = await data.json();
-    if (response.sucess) {
+    if (response.success) {
       setLoading(false);
       toast.success(response.message);
       navigate("/");
     }
-    if (!response.sucess) {
+    if (!response.success) {
       setLoading(false);
-      toast.success(response.message);
+      toast.error(response.message);
     }
   };
+
+  const handleUpdate = () => {
+    navigate("/dasboard/add", { state: { id, name, price, image } });
+  };
+
   return (
-    <div className="max-w-xs relative  rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
+    <div className="max-w-xs relative rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
       {Loading && <Loader />}
       <img
         src={image}
@@ -35,14 +42,15 @@ const Card = ({ image, name, price, admin = false, id = null }) => {
         className="object-cover object-center w-52 rounded-t-md h-52 dark:bg-gray-500"
       />
       {admin && (
-        <div className=" top-1  absolute left-3 text-center">
-          <span className="pr-14 ">🖋️</span>
-          <span onClick={handleDelete} className="pl-20 cursor-pointer ">
+        <div className="top-1 absolute left-3 text-center">
+          <span className="pr-14 cursor-pointer" onClick={handleUpdate}>
+            🖋️
+          </span>
+          <span onClick={handleDelete} className="pl-20 cursor-pointer">
             ❌
           </span>
         </div>
       )}
-
       <div className="flex flex-col justify-between p-6 space-y-8">
         <div className="space-y-2">
           <h2 className="text-3xl font-semibold tracking-wide">{price}</h2>
