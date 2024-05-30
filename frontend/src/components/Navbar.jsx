@@ -26,6 +26,14 @@ const Navbar = ({ isAuthenticated = false }) => {
           >
             Home
           </Link>
+          {isAuthenticated && (
+            <Link
+              to={"/order"}
+              className="mr-5 hover:text-black hover:bg-white rounded p-2 px-4 cursor-pointer"
+            >
+              My Orders
+            </Link>
+          )}
           <Link
             to={"/about"}
             className="mr-5 hover:text-black hover:bg-white rounded p-2 px-4 cursor-pointer"

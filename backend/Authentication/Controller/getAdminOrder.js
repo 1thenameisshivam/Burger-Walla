@@ -3,7 +3,7 @@ import myOrderSchema from "../Model/myOrderSchema.js";
 const getAdminOrder = async (req, res) => {
   try {
     console.log("Fetching admin orders...");
-    const orders = await myOrderSchema.find({});
+    const orders = await myOrderSchema.find({}).populate("user", "name");
     //   .populate("user", "name");
     console.log("Fetched orders:", orders);
     res.status(200).json({ orders, success: true });

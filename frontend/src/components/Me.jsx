@@ -47,9 +47,9 @@ const Me = () => {
               Dasboard
             </Link>
           )}
-          <button className="bg-violet-500 p-2 text-white rounded">
+          <Link to={"/order"} className="bg-violet-500 p-2 text-white rounded">
             Oders
-          </button>
+          </Link>
           <button
             onClick={handleLogout}
             className="bg-violet-500 p-2 text-white rounded"

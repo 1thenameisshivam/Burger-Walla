@@ -1,11 +1,21 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEye } from "react-icons/ai";
-
+import { VITE_CREATE_ORDER } from "../config/constant";
 const MyOrders = () => {
-  const arr = [1, 2, 3, 4];
-
+  const [arr, setArr] = useState([]);
+  useEffect(() => {
+    fetchMyOrders();
+  }, []);
+  const fetchMyOrders = async () => {
+    const data = await fetch(VITE_CREATE_ORDER, {
+      method: "GET",
+      credentials: "include",
+    });
+    const response = await data.json();
+    setArr(response.orders);
+  };
   return (
     <section className="tableClass">
       <main>
@@ -24,13 +34,13 @@ const MyOrders = () => {
           <tbody>
             {arr.map((i) => (
               <tr key={i}>
-                <td className="p-4 border ">#sdkfsdfdsf</td>
-                <td className="p-4 border ">Processing</td>
-                <td className="p-4 border ">23</td>
-                <td className="p-4 border ">₹{21312}</td>
-                <td className="p-4 border ">COD</td>
+                <td className="p-4 border ">{i._id}</td>
+                <td className="p-4 border ">{i.orderStatus}</td>
+                <td className="p-4 border ">{i.orderItems.length}</td>
+                <td className="p-4 border ">₹{i.totalAmount}</td>
+                <td className="p-4 border ">{i.paymentMethod}</td>
                 <td className="p-4 border ">
-                  <Link to={`/order/${"asdsds"}`}>
+                  <Link to={`/order/${i._id}`}>
                     <AiOutlineEye />
                   </Link>
                 </td>
