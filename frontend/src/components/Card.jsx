@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import Loader from "./Loader";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/orderCartslice";
 const Card = ({ image, name, price, admin = false, id = null }) => {
   const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleDelete = async () => {
     setLoading(true);
     const data = await fetch(VITE_DELETE_BURGER + id, {
@@ -32,7 +33,10 @@ const Card = ({ image, name, price, admin = false, id = null }) => {
   const handleUpdate = () => {
     navigate("/dasboard/add", { state: { id, name, price, image } });
   };
-
+  const handleClick = () => {
+    dispatch(addToCart({ name, price, image }));
+    toast.success("Item added to cart");
+  };
   return (
     <div className="max-w-xs relative rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
       {Loading && <Loader />}
@@ -57,6 +61,7 @@ const Card = ({ image, name, price, admin = false, id = null }) => {
           <p className="dark:text-gray-800">{name}</p>
         </div>
         <button
+          onClick={handleClick}
           type="button"
           className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-violet-600 dark:text-gray-50"
         >

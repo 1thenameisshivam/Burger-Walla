@@ -2,18 +2,21 @@
 import React from "react";
 import CartCard from "../components/CartCard";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Cart = () => {
+  const data = useSelector((state) => state.Cart);
+  const totalItem = data.cart.length;
   return (
     <div className="container mx-auto mt-10">
       <div className="sm:flex shadow-md my-10">
         <div className="  w-full  sm:w-3/4 bg-white px-10 py-10">
           <div className="flex justify-between border-b pb-8">
             <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-            <h2 className="font-semibold text-2xl">3 Items</h2>
+            <h2 className="font-semibold text-2xl">Total Items: {totalItem}</h2>
           </div>
-          <CartCard />
-          <CartCard />
-          <CartCard />
+          {data?.cart.map((item, index) => (
+            <CartCard key={index} {...item} />
+          ))}
           <Link
             to={"/"}
             className="flex font-semibold text-indigo-600 text-sm mt-10"
@@ -35,21 +38,23 @@ const Cart = () => {
             Order Summary
           </h1>
           <div className="flex justify-between mt-10 mb-5">
-            <span className="font-semibold text-sm uppercase">Items 3</span>
-            <span className="font-semibold text-sm">590$</span>
+            <span className="font-semibold text-sm uppercase">
+              Total Items: {totalItem}
+            </span>
+            <span className="font-semibold text-sm">{data?.totalPrice}</span>
           </div>
           <div>
             <label className="font-medium inline-block mb-3 text-sm uppercase">
               Shipping
             </label>
-            <select className="block p-2 text-gray-600 w-full text-sm">
-              <option>Standard shipping - $10.00</option>
-            </select>
+            <div className="block p-2 text-gray-600 w-full text-sm">
+              Standard shipping - Rs:100.00
+            </div>
           </div>
           <div className="border-t mt-8">
             <div className="flex font-semibold justify-between py-6 text-sm uppercase">
               <span>Total cost</span>
-              <span>$600</span>
+              {totalItem && <span>{data?.totalPrice + 100}</span>}
             </div>
             <Link to={"/cart/shipping"}>
               <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
