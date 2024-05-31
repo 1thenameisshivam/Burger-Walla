@@ -3,7 +3,7 @@ import React from "react";
 import MyOrders from "../components/MyOrders";
 const Order = () => {
   return (
-    <div className="h-[90vh] flex items-center justify-center">
+    <div className="min-h-[90vh] p-7 flex items-center justify-center">
       <MyOrders />
     </div>
   );

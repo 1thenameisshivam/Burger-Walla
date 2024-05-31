@@ -8,6 +8,7 @@ import Authorised from "../../Middleware/Authorised.js";
 import changeOrderStatus from "../Controller/changeOrderStatus.js";
 import createOrderOnline from "../Controller/createOrderOnline.js";
 import onlinePaymentVarification from "../Controller/onlinePaymentVarification.js";
+import sendKey from "../Controller/sendKey.js";
 const orderRoute = express.Router();
 
 orderRoute.post("/", Authenticate, placeOrder);
@@ -17,5 +18,6 @@ orderRoute.get("/", Authenticate, findMyOrders);
 orderRoute.get("/detail/:id", Authenticate, getOrderDetail);
 orderRoute.get("/admin", Authenticate, Authorised, getAdminOrder);
 orderRoute.get("/status/:id", Authenticate, Authorised, changeOrderStatus);
+orderRoute.get("/key", Authenticate, sendKey);
 
 export default orderRoute;

@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 import { FRONTEND_URL, PORT } from "./Utils/constant.js";
 import cookieParser from "cookie-parser";
 import dbConnection from "./Utils/dbConnection.js";
@@ -14,6 +15,7 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 dbConnection();

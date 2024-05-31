@@ -17,7 +17,7 @@ const MyOrders = () => {
     setArr(response.orders);
   };
   return (
-    <section className="tableClass">
+    <section className="tableClass min-h-screen">
       <main>
         <table>
           <thead className="bg-violet-600 text-white rounded">
