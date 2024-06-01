@@ -55,7 +55,6 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart/shipping",
-        loader: ProtectLoader,
         element: (
           <CheckAuth>
             <Shipping />
@@ -64,7 +63,6 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart/confirm-order",
-        loader: ProtectLoader,
         element: (
           <CheckAuth>
             <ConfirmOrder />
@@ -73,7 +71,6 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart/payment-success",
-        loader: ProtectLoader,
         element: (
           <CheckAuth>
             <PaymentSuccess />
