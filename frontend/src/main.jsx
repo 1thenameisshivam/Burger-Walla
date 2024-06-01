@@ -22,6 +22,7 @@ import { Provider } from "react-redux";
 import CheckAuth from "./Utils/CheckAuth.js";
 import AddBurger from "./pages/AddBurger.jsx";
 import AllBurger from "./pages/AllBurger.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart/shipping",
+        loader: ProtectLoader,
         element: (
           <CheckAuth>
             <Shipping />
@@ -62,6 +64,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart/confirm-order",
+        loader: ProtectLoader,
         element: (
           <CheckAuth>
             <ConfirmOrder />
@@ -70,6 +73,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart/payment-success",
+        loader: ProtectLoader,
         element: (
           <CheckAuth>
             <PaymentSuccess />

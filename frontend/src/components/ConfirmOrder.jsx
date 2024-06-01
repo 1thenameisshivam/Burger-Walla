@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { Link, json } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -12,6 +11,7 @@ import {
 } from "../config/constant";
 import { addOrderItems } from "../redux/checkDetailSlice";
 import { toast } from "react-toastify";
+import { clearCart } from "../redux/orderCartslice";
 const ConfirmOrder = () => {
   const orderItems = useSelector((state) => state.Cart.cart);
   const dispatch = useDispatch();
@@ -47,6 +47,7 @@ const ConfirmOrder = () => {
       const response = await order.json();
       if (response.sucess) {
         toast.success(response.message);
+        dispatch(clearCart());
         navigate("/cart/payment-success");
       } else {
         toast.error(response.message);
@@ -99,6 +100,7 @@ const ConfirmOrder = () => {
           const data = await res.json();
           if (data.success) {
             toast.success(data.message);
+            dispatch(clearCart());
             navigate("/cart/payment-success");
           } else {
             toast.error(data.message);

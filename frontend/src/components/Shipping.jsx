@@ -76,6 +76,7 @@ const Shipping = () => {
                   });
                 }}
               >
+                <option value="">Select Country</option>
                 {Country.getAllCountries().map((country) => (
                   <option
                     className="text-black"
@@ -138,6 +139,7 @@ const Shipping = () => {
                   })
                 }
               >
+                <option value="">Select City</option>
                 {state &&
                   City.getCitiesOfState(country, state).map((city, index) => (
                     <option
@@ -166,6 +168,7 @@ const Shipping = () => {
                   });
                 }}
               >
+                <option value="">Select State</option>
                 {country &&
                   State.getStatesOfCountry(country).map((state) => (
                     <option
