@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
 import Contact from "./pages/Contact.jsx";
 import Cart from "./pages/Cart.jsx";
 import Shipping from "./components/Shipping.jsx";
@@ -22,11 +23,11 @@ import { Provider } from "react-redux";
 import CheckAuth from "./Utils/CheckAuth.js";
 import AddBurger from "./pages/AddBurger.jsx";
 import AllBurger from "./pages/AllBurger.jsx";
-
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

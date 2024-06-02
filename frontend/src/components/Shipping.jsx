@@ -50,6 +50,7 @@ const Shipping = () => {
                 id="houseNo"
                 type="text"
                 name="hNo"
+                required="true"
                 onChange={(e) =>
                   setShippingInfo({
                     ...shippingInfo,
@@ -67,6 +68,7 @@ const Shipping = () => {
               <select
                 id="country"
                 name="country"
+                required="true"
                 className="w-full p-2 rounded-md focus:ring focus:ring-opacity-75 focus:dark:ring-violet-600 dark:border-gray-300 text-black"
                 onChange={(e) => {
                   setCountry(e.target.value);
@@ -95,6 +97,7 @@ const Shipping = () => {
               <input
                 id="email"
                 name="email"
+                required="true"
                 type="email"
                 onChange={(e) =>
                   setShippingInfo({
@@ -112,6 +115,7 @@ const Shipping = () => {
               </label>
               <input
                 id="address"
+                required="true"
                 type="text"
                 name="address"
                 onChange={(e) =>
@@ -129,6 +133,7 @@ const Shipping = () => {
                 City
               </label>
               <select
+                required="true"
                 id="city"
                 name="city"
                 className="w-full p-2 rounded-md focus:ring focus:ring-opacity-75  focus:dark:ring-violet-600 dark:border-gray-300 text-black"
@@ -157,6 +162,7 @@ const Shipping = () => {
                 State / Province
               </label>
               <select
+                required="true"
                 name="state"
                 id="state"
                 className="w-full p-2 rounded-md focus:ring focus:ring-opacity-75 focus:dark:ring-violet-600 dark:border-gray-300 text-black"
@@ -186,6 +192,7 @@ const Shipping = () => {
                 ZIP / Postal
               </label>
               <input
+                required="true"
                 name="pinCode"
                 onChange={(e) =>
                   setShippingInfo({

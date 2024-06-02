@@ -1,8 +1,21 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-
+import { VITE_GET_ALL_USER } from "../config/constant";
 const Users = () => {
-  const arr = [1, 2, 3, 4];
+  const [arr, setArr] = React.useState([]);
+
+  React.useEffect(() => {
+    getUserData();
+  }, []);
+
+  const getUserData = async () => {
+    const response = await fetch(VITE_GET_ALL_USER, {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await response.json();
+    setArr(data.data);
+  };
 
   return (
     <section className="tableClass flex items-center justify-center h-[90vh] ">
@@ -19,15 +32,13 @@ const Users = () => {
           </thead>
 
           <tbody>
-            {arr.map((i) => (
-              <tr key={i}>
-                <td className="p-4 border ">#sdkfsdfdsf</td>
-                <td className="p-4 border ">Abhi</td>
-                <td className="p-4 border ">
-                  <img src={""} alt="User" />
-                </td>
-                <td className="p-4 border ">Admin</td>
-                <td className="p-4 border ">{"24-23-2023"}</td>
+            {arr?.map((i) => (
+              <tr key={i._id}>
+                <td className="p-4 border ">{i._id}</td>
+                <td className="p-4 border ">{i.name}</td>
+                <td className="p-4 border ">null</td>
+                <td className="p-4 border ">{i.role}</td>
+                <td className="p-4 border ">{i.createdAt.slice(0, 10)}</td>
               </tr>
             ))}
           </tbody>
