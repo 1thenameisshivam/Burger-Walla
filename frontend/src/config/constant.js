@@ -13,4 +13,5 @@ export const {
   VITE_GET_KEY,
   VITE_ONLINE_PAYMENT_VARIFICATION,
   VITE_GET_ALL_USER,
+  VITE_GET_STATS,
 } = import.meta.env;

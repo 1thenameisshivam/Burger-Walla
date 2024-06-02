@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { VITE_GET_ALL_USER } from "../config/constant";
+import { toast } from "react-toastify";
 const Users = () => {
   const [arr, setArr] = React.useState([]);
 
@@ -9,12 +10,19 @@ const Users = () => {
   }, []);
 
   const getUserData = async () => {
-    const response = await fetch(VITE_GET_ALL_USER, {
-      method: "GET",
-      credentials: "include",
-    });
-    const data = await response.json();
-    setArr(data.data);
+    try {
+      const response = await fetch(VITE_GET_ALL_USER, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!data.status) {
+        toast.error(data.message);
+      }
+      setArr(data.data);
+    } catch (err) {
+      toast.error("Server Error");
+    }
   };
 
   return (

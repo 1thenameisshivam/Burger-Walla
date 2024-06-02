@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, Tooltip, ArcElement, Legend } from "chart.js";
-
+import { VITE_GET_STATS } from "../config/constant";
 ChartJS.register(Tooltip, ArcElement, Legend);
 
 const loading = false;
@@ -20,12 +20,31 @@ const Box = ({ title, value }) => (
 );
 
 const Dashboard = () => {
+  const [stats, setState] = React.useState();
+
+  useEffect(() => {
+    getStats();
+  }, []);
+
+  const getStats = async () => {
+    const response = await fetch(VITE_GET_STATS, {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await response.json();
+    setState(data);
+  };
+
   const data = {
     labels: ["Preparing", "Shipped", "Delivered"],
     datasets: [
       {
         label: "# of orders",
-        data: [2, 3, 4],
+        data: [
+          stats?.prepearingOrder,
+          stats?.deliveredOrder,
+          stats?.shippedOrder,
+        ],
         backgroundColor: [
           "rgba(159,63,176,0.1)",
           "rgba(78,63,176,0.2)",
@@ -42,9 +61,9 @@ const Dashboard = () => {
       {loading === false ? (
         <main>
           <article className="bg-gray-200 flex justify-around">
-            <Box title="Users" value={213} />
-            <Box title="Orders" value={23} />
-            <Box title="Income" value={21323} />
+            <Box title="Users" value={stats?.users} />
+            <Box title="Orders" value={stats?.orders} />
+            <Box title="Income" value={stats?.totalAmount} />
           </article>
 
           <section className="flex items-center justify-center gap-6 h-[70vh]">
